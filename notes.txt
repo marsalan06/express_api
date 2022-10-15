@@ -1,0 +1,62 @@
+npm init
+npm install express
+npm install nodemon --save-dev
+
+change the scripts in package.json, as 
+"scripts": {
+    "start" : "nodemon index.js"
+
+imported express , created app, added a '/' route, listen at port 3000
+and npm start,
+
+We are using mongoose for mongodb, npm install mongoose, use mlab as saas work with
+0.5gb free tier, we are using my mongodb, to create security for password we will use 
+.env file, npm install dotenv,
+
+for connecting to express we have, mongoose, we require it, 
+and use it as mongoos.connect('<connection_string',()=>{console.log("connected")})
+
+Using .env file we defined a key value pair DB_CONNECTION and without using const we require the 
+dotenv/config package and use it as process.env.DB_CONNECTION,
+
+ROutes can be isolated to a seprate location, a folder routes and it can have file posts.js
+in the routes folder we have posts.js where we import express and call express.router, create a route.get method
+and export the router object
+router methods can be get,post,put,delete
+
+import the routes in index.js and the app.use('/posts',postsRoute) will allow for the app route in django
+and each method in the app can now have its own route 'a','b' so final route will be posts/a/.
+
+=====================================================================================================================
+models can be created for database, mongoose allows us to do that, create a models folder,create a Post.js file, mongoose allows
+for the schema(table) to be made and field descriptions can be given as json objects
+we export the Post model and use it in routes/posts
+=====================================================================================================================
+to pasrs request for post, put method we need a package called body-parser,we call it in index.js and use it as app.use(bodyParser.json())
+in index js before the route.
+this allows the request to be sent as post with body on raw json format,
+we can make it better using async await,
+for GET we use Posts.find() method and we have diffrent methods to get modified results
+place it in a try catch block, for a specific post we use req.params.<param_name> and the url is /:param_name,
+use the Post.findByID() method if it uses an ID,
+
+DELETE method uses the same url with id param and we use the method Post.remove and pass the id to it and get a response like
+{
+  "removedPost": {
+    "acknowledged": true,
+    "deletedCount": 1
+  }
+}
+Patch method uses post.updateone with the id and the $set fucntion to upate it,
+the response is 
+
+{
+  "acknowledged": true,
+  "modifiedCount": 1,
+  "upsertedId": null,
+  "upsertedCount": 0,
+  "matchedCount": 1
+}
+
+
+
